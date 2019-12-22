@@ -16,7 +16,7 @@ FACEBOOK_FORM_ID = os.environ.get('FACEBOOK_FORM_ID')
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY')
 MAILCHIMP_LIST_ID = os.environ.get('MAILCHIMP_LIST_ID')
 # Run script every x seconds
-SCRIPT_RUNTIME_PERIOD = 60
+SCRIPT_RUNTIME_PERIOD = 86400
 
 def processLead(lead_data):
 
@@ -24,9 +24,9 @@ def processLead(lead_data):
 
     for fields in lead_data['field_data']:
         subscriber_info[fields['name']] = fields['values'][0]
-
-    mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
-    mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
+    print(subscriber_info)
+    #mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
+    #mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
 
 def getLeads(timestamp):
     FacebookAdsApi.init(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, FACEBOOK_ACCESS_TOKEN)
