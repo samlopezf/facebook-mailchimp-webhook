@@ -1,3 +1,4 @@
+#!/usr/bin/python2.7
 from flask import Flask, request
 
 from facebookads.adobjects.lead import Lead
