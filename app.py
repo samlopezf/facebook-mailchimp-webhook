@@ -21,17 +21,19 @@ SCRIPT_RUNTIME_PERIOD = 60
 def processLead(lead_data):
 
     subscriber_info = {}
-
-
+    subscriber_info['status'] = 'subscribed'
+    merged_fields = {}
+    
     for fields in lead_data['field_data']:
         if fields['name'] == 'first_name':
-            subscriber_info['First Name'] = fields['values'][0]
+            merged_fields['FNAME'] = fields['values'][0]
         if fields['name'] == 'last_name':
-            subscriber_info['Last Name'] = fields['values'][0]
+            merged_fields['LNAME'] = fields['values'][0]
         if fields['name'] == 'email':
             subscriber_info['email'] = fields['values'][0]
         if fields['name'] == 'how_often_would_you_like_to_hear_from_us?':
-            subscriber_info['how_often_would_you_like_'] = fields['values'][0]
+            merged_fields['MMERGE7'] = fields['values'][0]
+    subscriber_info['merge_fields'] = merged_fields
     print(subscriber_info)    
     mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
     mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
