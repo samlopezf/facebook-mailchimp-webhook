@@ -36,13 +36,13 @@ def processLead(lead_data):
     subscriber_info['merge_fields'] = merged_fields
     print(subscriber_info)    
     mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
-    mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
+    mailchimp_api.lists.members.create(MAILCHIMP_LIST_ID, subscriber_info)
 
 def getLeads(timestamp):
     FacebookAdsApi.init(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, FACEBOOK_ACCESS_TOKEN)
     form = LeadgenForm(FACEBOOK_FORM_ID)
     leads_data = form.get_leads(params={'filtering':[{'field':'time_created','operator':'GREATER_THAN','value':timestamp}]})
-
+    print(leads_data)
     return leads_data
 
 while 1:
