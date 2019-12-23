@@ -32,7 +32,7 @@ def processLead(lead_data):
             subscriber_info['email'] = fields['values'][0]
         if fields['name'] == 'how_often_would_you_like_to_hear_from_us?':
             subscriber_info['how_often_would_you_like_'] = fields['values'][0]
-            
+    print(subscriber_info)    
     mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
     mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
 
