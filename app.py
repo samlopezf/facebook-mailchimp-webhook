@@ -49,5 +49,8 @@ while 1:
     timestamp = int(time.time()-SCRIPT_RUNTIME_PERIOD)
     leads_data = getLeads(timestamp)
     for lead_data in leads_data:
-        processLead(lead_data)
+        try:
+            processLead(lead_data)
+        except:
+            print('Skip Invalid Lead Request')
     time.sleep(SCRIPT_RUNTIME_PERIOD)
