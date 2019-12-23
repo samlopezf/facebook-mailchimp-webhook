@@ -22,9 +22,17 @@ def processLead(lead_data):
 
     subscriber_info = {}
 
-    for fields in lead_data['field_data']:
-        subscriber_info[fields['name']] = fields['values'][0]
 
+    for fields in lead_data['field_data']:
+        if fields['name'] == 'first_name':
+            subscriber_info['FNAME'] = fields['values'][0]
+        if fields['name'] == 'last_name':
+            subscriber_info['LNAME'] = fields['values'][0]
+        if fields['name'] == 'email':
+            subscriber_info['email'] = fields['values'][0]
+        if fields['name'] == 'how_often_would_you_like':
+            subscriber_info['MMERGE7'] = fields['values'][0]
+            
     mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
     mailchimp_api.lists.subscribe(MAILCHIMP_LIST_ID, subscriber_info)
 
