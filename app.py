@@ -4,7 +4,7 @@ from flask import Flask, request
 from facebookads.adobjects.lead import Lead
 from facebookads.adobjects.leadgenform import LeadgenForm
 from facebookads.api import FacebookAdsApi
-import mailchimp
+from mailchimp3 import MailChimp
 import time
 import os
 import json
@@ -30,12 +30,12 @@ def processLead(lead_data):
         if fields['name'] == 'last_name':
             merged_fields['LNAME'] = fields['values'][0]
         if fields['name'] == 'email':
-            subscriber_info['email'] = fields['values'][0]
+            subscriber_info['email_address'] = fields['values'][0]
         if fields['name'] == 'how_often_would_you_like_to_hear_from_us?':
             merged_fields['MMERGE7'] = fields['values'][0]
     subscriber_info['merge_fields'] = merged_fields
     print(subscriber_info)    
-    mailchimp_api = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
+    mailchimp_api = MailChimp(MAILCHIMP_API_KEY)
     mailchimp_api.lists.members.create(MAILCHIMP_LIST_ID, subscriber_info)
 
 def getLeads(timestamp):
