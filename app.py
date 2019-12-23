@@ -16,7 +16,7 @@ FACEBOOK_FORM_ID = os.environ.get('FACEBOOK_FORM_ID')
 MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY')
 MAILCHIMP_LIST_ID = os.environ.get('MAILCHIMP_LIST_ID')
 # Run script every x seconds
-SCRIPT_RUNTIME_PERIOD = 286400
+SCRIPT_RUNTIME_PERIOD = 30
 
 def processLead(lead_data):
 
